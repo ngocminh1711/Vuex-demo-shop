@@ -7,6 +7,7 @@
           class="white--text align-end"
           height="250px" 
           :src="product.image"
+          @click="navigateDetailProduct(product._id)"
         >
         </v-img>
         <v-card-title>{{product.name | formatName}}</v-card-title>
@@ -24,6 +25,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import router from "../../router/index.js"
 
 export default {
   name: "product-card",
@@ -34,6 +36,9 @@ export default {
     getAllProduct() {
       this.$store.dispatch("getProducts");
     },
+    navigateDetailProduct(idProduct) {
+      router.push({ path: `/detail/${idProduct}` })
+    }
   },
   filters: {
     formatPrice(productPrice){
