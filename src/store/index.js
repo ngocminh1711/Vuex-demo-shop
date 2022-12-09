@@ -12,11 +12,13 @@ const store = new Vuex.Store({
       products: [],
       totalPrice: 0,
     },
+    order: {}
   },
   getters: {
     getProducts: (state) => state.products,
     getProduct: (state) => state.product,
     getCart: (state) => state.cart,
+    getOrder: (state) => state.order
   },
   mutations: {
     ADD_PRODUCT(state, newProduct) {
@@ -159,9 +161,13 @@ const store = new Vuex.Store({
       context.commit("INCREMENT_PRODUCT_QUANTITY", index);
     },
 
-    //handle buy products
-    async buyProducts(context, order) {
-      let data = axios.post(`http://localhost:${PORT}/api/order/create`, order)
+    //handle create order
+    async createOrder(context, data) {
+      let order =  await axios.post(`http://localhost:${PORT}/api/order/create-order`, data)
+      console.log(order);
+    },
+    async getOrder(context, data) {
+      console.log(data);
     }
   },
 });

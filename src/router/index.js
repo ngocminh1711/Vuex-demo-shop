@@ -4,6 +4,7 @@ import Dashboard from "../components/Admin/Dashboard.vue"
 import HomePage from "../components/Homepage/Homepage.vue"
 import ProductDetail from "../components/Homepage/ProductDetail.vue"
 import CartDetail from "../components/Homepage/CartDetail.vue"
+import Bill from "../components/Homepage/Bill.vue"
 
 
 
@@ -29,6 +30,11 @@ const routes = [
         path: '/cart-detail',
         name: 'cart-detail',
         component: CartDetail,
+    },
+    {
+        path: '/bill-detail',
+        name: 'bill-detail',
+        component: Bill
     }
 ]
 

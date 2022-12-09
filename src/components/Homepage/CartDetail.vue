@@ -43,7 +43,11 @@
           </v-col>
         </v-row>
         <v-row class="d-flex justify-center">
-          <v-btn class="buy-btn teal darken-4" @click="buyProduct">Mua tất cả sản phẩm</v-btn>
+          <!-- <v-btn class="teal darken-4 buy-btn" @click="buyProduct">Mua tất cả sản phẩm</v-btn> -->
+          <div class="buy-btn">
+            <FormOrder/>  
+          </div>
+          
         </v-row>
       </v-container>
     </template>
@@ -52,9 +56,13 @@
 
 <script>
 import { mapGetters } from "vuex";
+import FormOrder from "../Homepage/FormOrder.vue"
 
 export default {
   name: "cart-detail",
+  components: {
+    FormOrder,
+  },
   methods: {
     deleteProduct(index) {
       this.$store.dispatch("deleteProductOnCart", index);

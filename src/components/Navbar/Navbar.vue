@@ -20,7 +20,7 @@
       target="_blank"
       text-color="black"
     >
-      <span class="mr-2">Login</span>
+      <span class="mr-2">Đăng Nhập</span>
       <v-icon>mdi-open-in-new</v-icon>
     </v-btn>
     <CartButton />
