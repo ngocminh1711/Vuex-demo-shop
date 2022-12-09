@@ -7,11 +7,16 @@ const PORT = 8000;
 const store = new Vuex.Store({
   state: {
     products: [],
-    product: {}
+    product: {},
+    cart: {
+      products: [],
+      totalPrice: 0,
+    },
   },
   getters: {
     getProducts: (state) => state.products,
-    getProduct: (state) => state.product
+    getProduct: (state) => state.product,
+    getCart: (state) => state.cart,
   },
   mutations: {
     ADD_PRODUCT(state, newProduct) {
@@ -36,9 +41,50 @@ const store = new Vuex.Store({
         }
       });
     },
-    SET_PRODUCT_BY_ID(state, product){
-      state.product = {...product}
-    }
+    SET_PRODUCT_BY_ID(state, product) {
+      state.product = { ...product };
+    },
+
+    // handle cart mutations
+    SET_CART(state, product) {
+      state.cart.products.push(product);
+      state.cart.totalPrice += product.price * product.quantity;
+      localStorage.setItem("cart", JSON.stringify({ cart: state.cart }));
+    },
+    DELETE_PRODUCT_ON_CART(state, index) {
+      let cart = { ...state.cart };
+      cart.products.forEach((product, i) => {
+        if (i == index) {
+          state.cart.products.splice(i, 1);
+          state.cart.totalPrice =
+            state.cart.totalPrice - product.price * product.quantity;
+          localStorage.setItem("cart", JSON.stringify({ cart: state.cart }));
+        }
+      });
+      console.log(state.cart);
+    },
+    DECREMENT_PRODUCT_QUANTITY(state, index) {
+      state.cart.products.forEach((product, i) => {
+        if (i === index) {
+          if (product.quantity > 1) {
+            product.quantity--;
+            state.cart.totalPrice = state.cart.totalPrice - product.price
+          }
+        }
+     
+      })
+      localStorage.setItem("cart", JSON.stringify({ cart: state.cart }));
+    },
+    INCREMENT_PRODUCT_QUANTITY(state, index) {
+      state.cart.products.forEach((product, i) => {
+        if (i === index) {
+            product.quantity++;
+            state.cart.totalPrice = state.cart.totalPrice + product.price
+        }
+     
+      })
+      localStorage.setItem("cart", JSON.stringify({ cart: state.cart }));
+    },
   },
   actions: {
     async createNewProduct(context, newProduct) {
@@ -87,16 +133,35 @@ const store = new Vuex.Store({
         console.log(err.message);
       }
     },
-    async getProductById (context, idProduct) {
+    async getProductById(context, idProduct) {
       try {
         let id = idProduct;
-        let data = await axios.get(`http://localhost:${PORT}/api/getProductById/${id}`)
-        context.commit("SET_PRODUCT_BY_ID", data.data.data)
-       
-      }
-      catch (err) {
+        let data = await axios.get(
+          `http://localhost:${PORT}/api/getProductById/${id}`
+        );
+        context.commit("SET_PRODUCT_BY_ID", data.data.data);
+      } catch (err) {
         console.log(err.message);
       }
+    },
+
+    // handle cart actions
+    addToCart(context, product) {
+      context.commit("SET_CART", product);
+    },
+    deleteProductOnCart(context, index) {
+      context.commit("DELETE_PRODUCT_ON_CART", index);
+    },
+    decrementQuantity(context, index) {
+      context.commit("DECREMENT_PRODUCT_QUANTITY", index);
+    },
+    incrementQuantity(context, index) {
+      context.commit("INCREMENT_PRODUCT_QUANTITY", index);
+    },
+
+    //handle buy products
+    async buyProducts(context, order) {
+      let data = axios.post(`http://localhost:${PORT}/api/order/create`, order)
     }
   },
 });

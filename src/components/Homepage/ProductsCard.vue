@@ -7,6 +7,7 @@
           class="white--text align-end"
           height="250px" 
           :src="product.image"
+          style="cursor: pointer"
           @click="navigateDetailProduct(product._id)"
         >
         </v-img>
@@ -15,7 +16,7 @@
             <h2 style="display: inline">VND</h2>
           <h2 style="display: inline"> {{ product.price | formatPrice  }}</h2>
         </v-card-text>
-        <v-btn class="teal darken-4"  width="100%">
+        <v-btn @click="navigateDetailProduct(product._id)" class="teal darken-4"  width="100%">
           <span style="color:azure">Mua Hàng</span>
         </v-btn>
       </v-card>
