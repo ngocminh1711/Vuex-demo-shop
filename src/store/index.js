@@ -87,6 +87,10 @@ const store = new Vuex.Store({
       })
       localStorage.setItem("cart", JSON.stringify({ cart: state.cart }));
     },
+    // handle order
+    SET_ORDER(state, order) {
+      state.order = {...order};
+    }
   },
   actions: {
     async createNewProduct(context, newProduct) {
@@ -96,6 +100,7 @@ const store = new Vuex.Store({
           newProduct
         );
         context.commit("ADD_PRODUCT", data.data.data);
+        
       } catch (err) {
         console.log(err.message);
       }
@@ -166,8 +171,11 @@ const store = new Vuex.Store({
       let order =  await axios.post(`http://localhost:${PORT}/api/order/create-order`, data)
       console.log(order);
     },
-    async getOrder(context, data) {
-      console.log(data);
+    async getOrder(context) {
+      let data = await axios.get(`http://localhost:${PORT}/api/order/`)
+      let order = data.data.data[data.data.data.length - 1];
+      console.log(order)
+      context.commit("SET_ORDER", order)
     }
   },
 });

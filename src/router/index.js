@@ -5,6 +5,7 @@ import HomePage from "../components/Homepage/Homepage.vue"
 import ProductDetail from "../components/Homepage/ProductDetail.vue"
 import CartDetail from "../components/Homepage/CartDetail.vue"
 import Bill from "../components/Homepage/Bill.vue"
+import FormSignIn from "../components/Homepage/FormSignIn.vue"
 
 
 
@@ -35,6 +36,11 @@ const routes = [
         path: '/bill-detail',
         name: 'bill-detail',
         component: Bill
+    },
+    {
+        path: '/sign-in',
+        name: 'form-sign-in',
+        component: FormSignIn
     }
 ]
 

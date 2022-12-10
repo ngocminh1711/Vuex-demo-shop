@@ -93,6 +93,7 @@
   </template>
 
   <script>
+import router from '../../router'
   export default {
     data: () => ({
       dialog: false,
@@ -116,8 +117,8 @@
           userInfo: userInfo,
           products: products
         }
-        
         this.$store.dispatch("createOrder", data)
+        router.push('/bill-detail')
       }
     }
   }
