@@ -4,9 +4,8 @@ import vuetify from './plugins/vuetify'
 import router from './router'
 import store from './store/index.js'
 import VueSimpleAlert from "vue-simple-alert";
+
 Vue.use(VueSimpleAlert);
-
-
 Vue.config.productionTip = false
 
 new Vue({

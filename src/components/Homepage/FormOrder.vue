@@ -119,6 +119,7 @@ import router from '../../router'
         }
         this.$store.dispatch("createOrder", data)
         router.push('/bill-detail')
+      
       }
     }
   }

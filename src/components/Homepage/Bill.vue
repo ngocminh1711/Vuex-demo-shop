@@ -103,6 +103,7 @@ export default {
       this.$store.dispatch("getOrder");
     },
     navigateHomepage() {
+      localStorage.clear()
       router.push('/')
     }
   },

@@ -16,7 +16,7 @@
     <v-spacer></v-spacer>
 
     <v-btn
-      href="https://github.com/vuetifyjs/vuetify/releases/latest"
+     @click="navigateSignIn"
       target="_blank"
       text-color="black"
     >
@@ -40,6 +40,9 @@ export default {
     navigateHome() {
       router.push({ path: `/` });
     },
+    navigateSignIn() {
+      router.push({ path: `/sign-in` });
+    }
   },
 };
 </script>

@@ -12,13 +12,15 @@ const store = new Vuex.Store({
       products: [],
       totalPrice: 0,
     },
-    order: {}
+    order: {},
+    orders: []
   },
   getters: {
     getProducts: (state) => state.products,
     getProduct: (state) => state.product,
     getCart: (state) => state.cart,
-    getOrder: (state) => state.order
+    getOrder: (state) => state.order,
+    getOrders: (state) => state.orders
   },
   mutations: {
     ADD_PRODUCT(state, newProduct) {
@@ -90,6 +92,18 @@ const store = new Vuex.Store({
     // handle order
     SET_ORDER(state, order) {
       state.order = {...order};
+    },
+
+    SET_ORDERS(state, orders) {
+      state.orders = [...orders];
+    },
+
+    DELETE_ORDER(state, id) {
+      state.orders.forEach((order,index) => {
+        if (order._id == id) {
+          state.orders.splice(index, 1);
+        }
+      })
     }
   },
   actions: {
@@ -176,6 +190,17 @@ const store = new Vuex.Store({
       let order = data.data.data[data.data.data.length - 1];
       console.log(order)
       context.commit("SET_ORDER", order)
+    },
+    async getOrders(context) {
+      let data = await axios.get(`http://localhost:${PORT}/api/order/`)
+      let orders = data.data.data
+      console.log(orders)
+      context.commit("SET_ORDERS", orders)
+    },
+    async deleteOrder(context, idOrder) {
+      let data = await axios.delete(`http://localhost:${PORT}/api/order/${idOrder}`)
+      let id = data.data.data._id;
+      context.commit("DELETE_ORDER", id)
     }
   },
 });

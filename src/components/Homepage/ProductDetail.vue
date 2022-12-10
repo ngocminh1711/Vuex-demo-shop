@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <v-col cols="6" md="4">
-          <img :src="getProduct.image" />
+          <img  width="110%" height="auto" :src="getProduct.image" />
         </v-col>
 
         <v-col class="info-text" cols="12" md="8">
@@ -137,6 +137,11 @@ export default {
         image: this.getProduct.image,
       };
       this.$store.dispatch("addToCart", this.product);
+      this.$alert(
+          "Thêm mới sản phẩm thành công.",
+          "Add Product successfully",
+          "success"
+        ).then(() => console.log("Closed"));
     },
   },
   computed: {

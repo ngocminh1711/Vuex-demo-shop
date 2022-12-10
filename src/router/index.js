@@ -6,6 +6,7 @@ import ProductDetail from "../components/Homepage/ProductDetail.vue"
 import CartDetail from "../components/Homepage/CartDetail.vue"
 import Bill from "../components/Homepage/Bill.vue"
 import FormSignIn from "../components/Homepage/FormSignIn.vue"
+import OrderDetail from "../components/Admin/OrderDetail.vue"
 
 
 
@@ -41,7 +42,12 @@ const routes = [
         path: '/sign-in',
         name: 'form-sign-in',
         component: FormSignIn
-    }
+    },
+    {
+        path: '/admin/order-detail',
+        name: 'order-detail',
+        component: OrderDetail
+    },
 ]
 
 const router = new VueRouter({

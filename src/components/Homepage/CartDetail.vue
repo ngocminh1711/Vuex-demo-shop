@@ -6,8 +6,8 @@
         v-for="(product, index) in getCart.products"
         :key="index"
       >
-        <v-col cols="4" style="postion: absolute">
-          <img style="postion: absolute" :src="product.image" />
+        <v-col cols="4">
+          <img width="95%" height="40%"  :src="product.image" />
         </v-col>
         <v-col cols="8">
           <div>
@@ -99,11 +99,6 @@ export default {
 .cart-list-product {
   height: 214px;
 }
-img {
-  position: absolute;
-  width: 244px;
-  height: 191px;
-}
 .cart-btn {
   margin-top: 0px;
   padding-left: 0px;
@@ -129,5 +124,9 @@ p {
 .delete-btn {
   float: right;
   margin-right: 10px;
+}
+img {
+  margin-top: 20px;
+  margin-left: 10px
 }
 </style>

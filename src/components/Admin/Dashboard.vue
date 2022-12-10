@@ -91,6 +91,7 @@
         <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
       </template>
     </v-data-table>
+    <router-view/>
   </v-container>
 </template>
 
